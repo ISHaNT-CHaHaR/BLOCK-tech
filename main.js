@@ -1,6 +1,6 @@
 const SHA256 = require('crypto-js/sha256');
 
-class Block {
+class Block {///////The BLOCK which contains data of blockchain
    constructor(index, timestamp, data, previousHash = '') {
       this.index = index;
       this.timestamp = timestamp;
@@ -10,7 +10,7 @@ class Block {
    }
 
    calculateHash() {
-      return SHA256(
+      return SHA256(////////a crypto module for blockchain
          this.index +
             this.previousHash +
             this.timestamp +
@@ -19,7 +19,7 @@ class Block {
    }
 }
 
-class Blockchain {
+class Blockchain {///////THe ledger which connects those blocks
    constructor() {
       this.chain = [this.craeateBlock()];
    }
@@ -42,7 +42,7 @@ class Blockchain {
       for (let i = 1; i < this.chain.length; i++) {
          const currentBlock = this.chain[i];
          const previousBlock = this.chain[i - 1];
-
+       console.log(currentBlock.hash);
          if (currentBlock.hash !== currentBlock.calculateHash()) {
             return false;
          }
@@ -54,8 +54,8 @@ class Blockchain {
    }
 }
 
-let coin = new Blockchain();
-coin.addBlock(new Block(1, '17/3/20', { amount: 4 }));
+let coin = new Blockchain();/////a new instance.
+coin.addBlock(new Block(1, '17/3/20', { amount: 4 }));///Updating BLOCKS
 coin.addBlock(new Block(2, '17/3/20', { amount: 4 }));
 
 console.log('is Blockchain validity? ' + coin.isChainValid());
